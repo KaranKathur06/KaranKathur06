@@ -1,5 +1,5 @@
 # 💫 About Me:
-🔭 I’m currently working on an AI Virtual Assistant that is just like Ironman's Jarves and Friday, That's called "GHOST"<br>🌱 I’m currently learning Linux, Bootstrap, Django, AI/ML.<br>💬 Ask me about Python, C, C++, Cyber Security.<br>📫 How to reach me karan.business.acc04061@gmail.com and kathurkaran077@gmail.com<br>⚡ Fun fact I think I'm funny and you will love and enjoy my company! Good Day .<br>
+🔭 I’m currently working on an AI Virtual Assistant that is just like Ironman's Jarves and Friday, That's called "GHOST".<br>🌱 I’m currently learning Linux, Bootstrap, Django, AI/ML.<br>💬 Ask me about Python, C, C++, Cyber Security.<br>📫 How to reach me karan.business.acc04061@gmail.com and kathurkaran077@gmail.com .<br>⚡ Fun fact I think I'm funny and you will love and enjoy my company! Good Day .<br>
 
 
 ## 🌐 Socials:

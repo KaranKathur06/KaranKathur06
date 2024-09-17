@@ -1,3 +1,6 @@
+<a href="#"><img width="100%" height="auto" src="https://giffiles.alphacoders.com/395/3951.gif" height="150px"/></a>
+<h1 align="left" >Hey there <img src="https://raw.githubusercontent.com/ABSphreak/ABSphreak/master/gifs/Hi.gif" width="30px">, I'm KARAN KATHUR </h1>
+
 # 💫 About Me:
 🔭 I’m currently working on an AI Virtual Assistant that is just like Ironman's Jarves and Friday, That's called "GHOST".<br>🌱 I’m currently learning Linux, Bootstrap, Django, AI/ML.<br>💬 Ask me about Python, C, C++, Cyber Security.<br>📫 How to reach me karan.business.acc04061@gmail.com and kathurkaran077@gmail.com .<br>⚡ Fun fact I think I'm funny and you will love and enjoy my company! Good Day .<br>
 

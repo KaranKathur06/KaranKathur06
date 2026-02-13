@@ -22,7 +22,7 @@ I’m Karan Kathur, a Full-Stack Product Engineer focused on building scalable p
 
 I design and implement complete systems — from UI architecture to backend logic, database modeling, analytics layers, and deployment workflows.
 
-Currently in my final year of B.Tech (IT), I’ve built and contributed to multiple real-world style platforms across web, AI, automation, and SaaS domains.
+I’ve built and contributed to multiple real-world style platforms across web, AI, automation, and SaaS domains.
 
 ### 🚀 Active & Major Projects
 

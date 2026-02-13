@@ -4,7 +4,7 @@
 
 <p align="left">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com/?lines=Python+%7C+AI%2FML+%7C+Flutter+Developer;Automation+%26+Cybersecurity+Enthusiast;Building+GHOST+%E2%80%94+an+AI+Assistant&left=true&size=22">
+    <img src="https://readme-typing-svg.herokuapp.com/?lines=Full-Stack+Product+Engineer;Platforms+%7C+Automation+%7C+AI-Driven+Systems;Building+G.H.O.S.T+%E2%80%94+AI+Virtual+Assistant;Next.js+%2B+TypeScript+%7C+Django+%7C+Flutter&left=true&size=22">
   </a>
 </p>
 

@@ -32,6 +32,7 @@ jobs:
 
       - name: Run analytics
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/analytics.py --username KaranKathur06 --timezone Asia/Kolkata --include-private --exclude-forks --exclude-merge-commits

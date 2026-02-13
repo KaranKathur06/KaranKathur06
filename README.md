@@ -20,7 +20,7 @@
 
 I’m Karan Kathur, a Full-Stack Product Engineer focused on building scalable platforms, automation systems, and AI-driven solutions.
 
-I design and implement complete systems — from UI architecture to backend logic, database modeling, analytics layers, and deployment workflows.
+I design and implement complete systems -from UI architecture to backend logic, database modeling, analytics layers, and deployment workflows.
 
 I’ve built and contributed to multiple real-world style platforms across web, AI, automation, and SaaS domains.
 
@@ -77,18 +77,7 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 
 <div align="center">
   <a href="https://github.com/denvercoder1/github-readme-streak-stats" title="Go to Source">
-    <img align="left" width="390" src="https://streak-stats.demolab.com/?user=KaranKathur06&theme=react&border=61dafb&hide_border=true" alt="KaranKathur06" />
-  </a>
-  <a href="https://github.com/anuraghazra/github-readme-stats" title="Go to Source">
-    <img align="right" width="390" src="https://github-readme-stats.vercel.app/api?username=KaranKathur06&show_icons=true&theme=react&border_color=61dafb&hide_border=true" alt="KaranKathur06" />
-  </a>
-</div>
-
-<br><br><br><br><br><br><br><br><br>
-
-<div align="center">
-  <a href="https://github.com/anuraghazra/github-readme-stats">
-    <img height="200" align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=KaranKathur06&title_color=61dafb&text_color=ffffff&icon_color=61dafb&bg_color=20232a&langs_count=8&layout=compact&border_color=61dafb&hide_border=true" alt="Top Languages" />
+    <img width="420" src="https://streak-stats.demolab.com/?user=KaranKathur06&theme=react&border=61dafb&hide_border=true" alt="KaranKathur06" />
   </a>
 </div>
 

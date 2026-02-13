@@ -206,7 +206,7 @@ def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
     args = build_arg_parser().parse_args()
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_PAT")
     if not token:
         raise RuntimeError("Missing GITHUB_TOKEN (or GH_TOKEN) environment variable")
 
@@ -220,14 +220,25 @@ def main() -> int:
 
     client = GitHubClient(token=token)
 
-    # If include_private is requested, validate token scope by calling /user
+    # If include_private is requested, validate token scope by calling /user.
+    # In GitHub Actions, the default GITHUB_TOKEN can be forbidden for /user.
+    # In that case, fall back to public-only repo listing instead of failing the workflow.
     if cfg.include_private:
         try:
             _ = client.get_authenticated_user()
-        except Exception as e:
-            raise RuntimeError(
-                "include-private requested but token cannot access /user. Use a PAT with repo scope."
-            ) from e
+        except Exception:
+            logging.warning(
+                "include-private requested but token cannot access /user. "
+                "Falling back to public repositories only. "
+                "To include private repos, add a PAT as GH_TOKEN secret with repo scope."
+            )
+            cfg = Config(
+                username=cfg.username,
+                timezone=cfg.timezone,
+                include_private=False,
+                exclude_forks=cfg.exclude_forks,
+                exclude_merge_commits=cfg.exclude_merge_commits,
+            )
 
     total_commits, tod, weekday, lang_bytes = aggregate(client, cfg)
     new_md = render_markdown(total_commits, tod, weekday, lang_bytes)

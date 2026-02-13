@@ -150,6 +150,28 @@ def render_markdown(
     weekday: Counter,
     lang_bytes: Dict[str, int],
 ) -> str:
+    def render_bar_table(
+        labels: List[str],
+        counts: Dict[str, int],
+        total: int,
+        width: int,
+        label_emojis: Optional[Dict[str, str]] = None,
+    ) -> str:
+        max_count = max((int(counts.get(l, 0)) for l in labels), default=0)
+        lines: List[str] = []
+        for label in labels:
+            c = int(counts.get(label, 0))
+            pct = to_percent(c, total)
+            filled = 0 if max_count == 0 else round((c / max_count) * width)
+            filled = max(0, min(width, int(filled)))
+            bar = "█" * filled + "░" * (width - filled)
+            emoji = (label_emojis or {}).get(label, "")
+            left = f"{emoji} {label}".strip()
+            lines.append(
+                f"{left.ljust(12)}  {str(c).rjust(4)} commits  {bar}  {pct:06.2f} %"
+            )
+        return "\n".join(lines)
+
     def compact_commits_line(labels: List[str], counts: Dict[str, int]) -> str:
         parts: List[str] = []
         for label in labels:
@@ -168,6 +190,18 @@ def render_markdown(
     time_labels = [name for name, _, _ in TIME_BUCKETS]
     weekday_labels = WEEKDAYS[:]
 
+    time_emojis = {
+        "Morning": "🌞",
+        "Day": "🌆",
+        "Evening": "🌃",
+        "Night": "🌙",
+    }
+
+    most_productive_day = max(
+        weekday_labels,
+        key=lambda d: (int(weekday.get(d, 0)), -weekday_labels.index(d)),
+    )
+
     lang_sorted: List[Tuple[str, int]] = sorted(
         ((lang, int(b)) for lang, b in lang_bytes.items()), key=lambda x: x[1], reverse=True
     )
@@ -183,8 +217,18 @@ def render_markdown(
         + "### ⏰ Productivity by Time\n\n"
         + compact_commits_line(time_labels, tod)
         + "\n\n"
+        + "**I'm a Night 🦉**\n\n"
+        + "```text\n"
+        + render_bar_table(time_labels, tod, total_commits, width=25, label_emojis=time_emojis)
+        + "\n```\n\n"
+        + "\n\n"
         + "### 📅 Productivity by Weekday\n\n"
         + compact_commits_line(weekday_labels, weekday)
+        + "\n\n"
+        + f"📅 **I'm Most Productive on {most_productive_day}**\n\n"
+        + "```text\n"
+        + render_bar_table(weekday_labels, weekday, total_commits, width=25)
+        + "\n```\n\n"
         + "\n\n"
         + "### 💻 Language Usage\n\n"
         + compact_lang_line(lang_sorted)

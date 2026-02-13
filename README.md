@@ -95,30 +95,16 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 **Total Commits:** 212
 
 ### ⏰ Productivity by Time
-Morning    – 15 commits (7.08%)
-Day        – 158 commits (74.53%)
-Evening    – 37 commits (17.45%)
-Night      – 2 commits (0.94%)
+
+Morning – 15 commits (7.08%) Day – 158 commits (74.53%) Evening – 37 commits (17.45%) Night – 2 commits (0.94%)
 
 ### 📅 Productivity by Weekday
-Monday     – 14 commits (6.60%)
-Tuesday    – 44 commits (20.75%)
-Wednesday  – 26 commits (12.26%)
-Thursday   – 27 commits (12.74%)
-Friday     – 44 commits (20.75%)
-Saturday   – 39 commits (18.40%)
-Sunday     – 18 commits (8.49%)
+
+Monday – 14 commits (6.60%) Tuesday – 44 commits (20.75%) Wednesday – 26 commits (12.26%) Thursday – 27 commits (12.74%) Friday – 44 commits (20.75%) Saturday – 39 commits (18.40%) Sunday – 18 commits (8.49%)
 
 ### 💻 Language Usage
-Python       – 91.26%
-C++          – 4.66%
-Cython       – 1.81%
-TypeScript   – 1.03%
-C            – 0.48%
-HTML         – 0.33%
-CMake        – 0.20%
-JavaScript   – 0.05%
-Other        – 0.18%
+
+Python – 91.26% C++ – 4.66% Cython – 1.81% TypeScript – 1.03% C – 0.48% HTML – 0.33% CMake – 0.20% JavaScript – 0.05% Other – 0.17%
 <!--END_SECTION:github_stats-->
 
 <hr>

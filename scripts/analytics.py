@@ -2,10 +2,10 @@ import argparse
 import logging
 import os
 import sys
+import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
-from datetime import date
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 import pytz
@@ -94,7 +94,7 @@ def iter_repos(client: GitHubClient, cfg: Config) -> Iterable[Dict]:
 def aggregate(
     client: GitHubClient,
     cfg: Config,
-) -> Tuple[int, Counter, Counter, Dict[str, int], Set[date]]:
+) -> Tuple[int, Counter, Counter, Dict[str, int]]:
     tz = pytz.timezone(cfg.timezone)
 
     total_commits = 0
@@ -103,7 +103,6 @@ def aggregate(
     lang_bytes: Dict[str, int] = defaultdict(int)
 
     seen_shas: Set[str] = set()
-    commit_days: Set[date] = set()
 
     for repo in iter_repos(client, cfg):
         if cfg.exclude_forks and repo.get("fork") is True:
@@ -143,46 +142,30 @@ def aggregate(
                     total_commits += 1
                     tod[bucket_time_of_day(local_dt)] += 1
                     weekday[WEEKDAYS[local_dt.weekday()]] += 1
-                    commit_days.add(local_dt.date())
         except Exception:
             logging.exception("Failed to fetch commits for %s/%s", owner, name)
 
-    return total_commits, tod, weekday, dict(lang_bytes), commit_days
+    return total_commits, tod, weekday, dict(lang_bytes)
 
 
-def compute_streaks(days: Set[date], today: date) -> Tuple[int, int]:
-    if not days:
-        return 0, 0
+def extract_language_allowlist_from_readme(readme_path: str) -> Optional[Set[str]]:
+    try:
+        content = open(readme_path, "r", encoding="utf-8").read()
+    except Exception:
+        return None
 
-    sorted_days = sorted(days)
-    longest = 1
-    current_run = 1
+    # Look for the "**💻 Languages**" block and parse the next non-empty line.
+    # Expected format: Python • C • C++ • Java • TypeScript • Dart • SQL
+    m = re.search(r"\*\*💻 Languages\*\*\s*\n\s*\n([^\n]+)", content)
+    if not m:
+        return None
 
-    for i in range(1, len(sorted_days)):
-        delta = (sorted_days[i] - sorted_days[i - 1]).days
-        if delta == 1:
-            current_run += 1
-        elif delta == 0:
-            continue
-        else:
-            longest = max(longest, current_run)
-            current_run = 1
-
-    longest = max(longest, current_run)
-
-    # current streak ends today (or yesterday if no commit today)
-    days_set = set(days)
-    streak_end = today if today in days_set else (today - timedelta(days=1))
-    if streak_end not in days_set:
-        return 0, longest
-
-    cur = 0
-    d = streak_end
-    while d in days_set:
-        cur += 1
-        d = d - timedelta(days=1)
-
-    return cur, longest
+    line = m.group(1).strip()
+    parts = [p.strip() for p in line.split("•")]
+    parts = [p for p in parts if p]
+    if not parts:
+        return None
+    return set(parts)
 
 
 def render_markdown(
@@ -190,8 +173,7 @@ def render_markdown(
     tod: Counter,
     weekday: Counter,
     lang_bytes: Dict[str, int],
-    commit_days: Set[date],
-    tz_name: str,
+    language_allowlist: Optional[Set[str]],
 ) -> str:
     def render_bar_table(
         labels: List[str],
@@ -240,8 +222,40 @@ def render_markdown(
         key=lambda d: (int(weekday.get(d, 0)), -weekday_labels.index(d)),
     )
 
+    # Filter languages to only the ones you claim to work with (from README About Me),
+    # and group everything else under Other.
+    def normalize_lang(name: str) -> str:
+        return name.strip()
+
+    allow = set(normalize_lang(x) for x in language_allowlist) if language_allowlist else None
+    allow_map = {
+        "C++": "C++",
+        "C": "C",
+        "Python": "Python",
+        "Java": "Java",
+        "TypeScript": "TypeScript",
+        "JavaScript": "JavaScript",
+        "Dart": "Dart",
+        "SQL": "SQL",
+    }
+
+    filtered_bytes: Dict[str, int] = defaultdict(int)
+    other_bytes = 0
+    for lang, b in lang_bytes.items():
+        lang_norm = normalize_lang(lang)
+        display = allow_map.get(lang_norm, lang_norm)
+        if allow is not None and display not in allow:
+            other_bytes += int(b)
+        else:
+            filtered_bytes[display] += int(b)
+
+    if other_bytes > 0:
+        filtered_bytes["Other"] += other_bytes
+
     lang_sorted: List[Tuple[str, int]] = sorted(
-        ((lang, int(b)) for lang, b in lang_bytes.items()), key=lambda x: x[1], reverse=True
+        ((lang, int(b)) for lang, b in filtered_bytes.items()),
+        key=lambda x: x[1],
+        reverse=True,
     )
 
     if len(lang_sorted) > 8:
@@ -257,16 +271,9 @@ def render_markdown(
     # Convert languages list into a counts dict for bar rendering
     lang_counts: Dict[str, int] = {lang: int(b) for lang, b in lang_sorted}
 
-    tz = pytz.timezone(tz_name)
-    today_local = datetime.now(pytz.UTC).astimezone(tz).date()
-
-    current_streak, longest_streak = compute_streaks(commit_days, today_local)
-
     md = (
         "## 📊 GitHub Analytics\n\n"
         + f"**Total Commits:** {total_commits}\n\n"
-        + f"**Current Streak (commit-days):** {current_streak} days\n\n"
-        + f"**Longest Streak (commit-days):** {longest_streak} days\n\n"
         + f"**I'm a {day_owl_label} 🦉**\n\n"
         + "```text\n"
         + render_bar_table(
@@ -352,15 +359,9 @@ def main() -> int:
                 exclude_merge_commits=cfg.exclude_merge_commits,
             )
 
-    total_commits, tod, weekday, lang_bytes, commit_days = aggregate(client, cfg)
-    new_md = render_markdown(
-        total_commits,
-        tod,
-        weekday,
-        lang_bytes,
-        commit_days,
-        cfg.timezone,
-    )
+    total_commits, tod, weekday, lang_bytes = aggregate(client, cfg)
+    language_allowlist = extract_language_allowlist_from_readme(args.readme)
+    new_md = render_markdown(total_commits, tod, weekday, lang_bytes, language_allowlist)
 
     from pathlib import Path
 

@@ -98,7 +98,7 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 
 Morning – 15 commits (7.08%) Day – 158 commits (74.53%) Evening – 37 commits (17.45%) Night – 2 commits (0.94%)
 
-**I'm a Night 🦉**
+**I'm a Day 🦉**
 
 ```text
 🌞 Morning       15 commits  ██░░░░░░░░░░░░░░░░░░░░░░░  007.08 %

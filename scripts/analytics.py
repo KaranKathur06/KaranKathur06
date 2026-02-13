@@ -4,7 +4,8 @@ import os
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date
+from datetime import datetime, timedelta
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 import pytz
@@ -90,7 +91,10 @@ def iter_repos(client: GitHubClient, cfg: Config) -> Iterable[Dict]:
             yield repo
 
 
-def aggregate(client: GitHubClient, cfg: Config) -> Tuple[int, Counter, Counter, Dict[str, int]]:
+def aggregate(
+    client: GitHubClient,
+    cfg: Config,
+) -> Tuple[int, Counter, Counter, Dict[str, int], Set[date]]:
     tz = pytz.timezone(cfg.timezone)
 
     total_commits = 0
@@ -99,6 +103,7 @@ def aggregate(client: GitHubClient, cfg: Config) -> Tuple[int, Counter, Counter,
     lang_bytes: Dict[str, int] = defaultdict(int)
 
     seen_shas: Set[str] = set()
+    commit_days: Set[date] = set()
 
     for repo in iter_repos(client, cfg):
         if cfg.exclude_forks and repo.get("fork") is True:
@@ -138,10 +143,46 @@ def aggregate(client: GitHubClient, cfg: Config) -> Tuple[int, Counter, Counter,
                     total_commits += 1
                     tod[bucket_time_of_day(local_dt)] += 1
                     weekday[WEEKDAYS[local_dt.weekday()]] += 1
+                    commit_days.add(local_dt.date())
         except Exception:
             logging.exception("Failed to fetch commits for %s/%s", owner, name)
 
-    return total_commits, tod, weekday, dict(lang_bytes)
+    return total_commits, tod, weekday, dict(lang_bytes), commit_days
+
+
+def compute_streaks(days: Set[date], today: date) -> Tuple[int, int]:
+    if not days:
+        return 0, 0
+
+    sorted_days = sorted(days)
+    longest = 1
+    current_run = 1
+
+    for i in range(1, len(sorted_days)):
+        delta = (sorted_days[i] - sorted_days[i - 1]).days
+        if delta == 1:
+            current_run += 1
+        elif delta == 0:
+            continue
+        else:
+            longest = max(longest, current_run)
+            current_run = 1
+
+    longest = max(longest, current_run)
+
+    # current streak ends today (or yesterday if no commit today)
+    days_set = set(days)
+    streak_end = today if today in days_set else (today - timedelta(days=1))
+    if streak_end not in days_set:
+        return 0, longest
+
+    cur = 0
+    d = streak_end
+    while d in days_set:
+        cur += 1
+        d = d - timedelta(days=1)
+
+    return cur, longest
 
 
 def render_markdown(
@@ -149,43 +190,32 @@ def render_markdown(
     tod: Counter,
     weekday: Counter,
     lang_bytes: Dict[str, int],
+    commit_days: Set[date],
+    tz_name: str,
 ) -> str:
     def render_bar_table(
         labels: List[str],
         counts: Dict[str, int],
         total: int,
         width: int,
+        value_unit: str,
         label_emojis: Optional[Dict[str, str]] = None,
+        pct_overrides: Optional[Dict[str, float]] = None,
     ) -> str:
         max_count = max((int(counts.get(l, 0)) for l in labels), default=0)
         lines: List[str] = []
         for label in labels:
             c = int(counts.get(label, 0))
-            pct = to_percent(c, total)
+            pct = float(pct_overrides[label]) if pct_overrides and label in pct_overrides else to_percent(c, total)
             filled = 0 if max_count == 0 else round((c / max_count) * width)
             filled = max(0, min(width, int(filled)))
             bar = "█" * filled + "░" * (width - filled)
             emoji = (label_emojis or {}).get(label, "")
             left = f"{emoji} {label}".strip()
             lines.append(
-                f"{left.ljust(12)}  {str(c).rjust(4)} commits  {bar}  {pct:06.2f} %"
+                f"{left.ljust(12)}  {str(c).rjust(4)} {value_unit}  {bar}  {pct:5.2f} %"
             )
         return "\n".join(lines)
-
-    def compact_commits_line(labels: List[str], counts: Dict[str, int]) -> str:
-        parts: List[str] = []
-        for label in labels:
-            c = int(counts.get(label, 0))
-            parts.append(f"{label} – {c} commits ({to_percent(c, total_commits):.2f}%)")
-        return " ".join(parts)
-
-    def compact_lang_line(rows: List[Tuple[str, int]]) -> str:
-        total_bytes = sum(b for _, b in rows)
-        parts: List[str] = []
-        for lang, b in rows:
-            pct = round((b / total_bytes * 100.0), 2) if total_bytes else 0.0
-            parts.append(f"{lang} – {pct:.2f}%")
-        return " ".join(parts) if parts else "No language data."
 
     time_labels = [name for name, _, _ in TIME_BUCKETS]
     weekday_labels = WEEKDAYS[:]
@@ -196,6 +226,14 @@ def render_markdown(
         "Evening": "🌃",
         "Night": "🌙",
     }
+
+    dominant_time = max(time_labels, key=lambda t: (int(tod.get(t, 0)), -time_labels.index(t)))
+    day_owl_label = {
+        "Morning": "Morning",
+        "Day": "Day",
+        "Evening": "Evening",
+        "Night": "Night",
+    }.get(dominant_time, "Night")
 
     most_productive_day = max(
         weekday_labels,
@@ -211,28 +249,56 @@ def render_markdown(
         other_bytes = sum(b for _, b in lang_sorted[8:])
         lang_sorted = top + [("Other", other_bytes)]
 
+    lang_total_bytes = sum(b for _, b in lang_sorted)
+    lang_pct_overrides: Dict[str, float] = {}
+    for lang, b in lang_sorted:
+        lang_pct_overrides[lang] = round((b / lang_total_bytes * 100.0), 2) if lang_total_bytes else 0.0
+
+    # Convert languages list into a counts dict for bar rendering
+    lang_counts: Dict[str, int] = {lang: int(b) for lang, b in lang_sorted}
+
+    tz = pytz.timezone(tz_name)
+    today_local = datetime.now(pytz.UTC).astimezone(tz).date()
+
+    current_streak, longest_streak = compute_streaks(commit_days, today_local)
+
     md = (
         "## 📊 GitHub Analytics\n\n"
         + f"**Total Commits:** {total_commits}\n\n"
-        + "### ⏰ Productivity by Time\n\n"
-        + compact_commits_line(time_labels, tod)
-        + "\n\n"
-        + "**I'm a Day 🦉**\n\n"
+        + f"**Current Streak (commit-days):** {current_streak} days\n\n"
+        + f"**Longest Streak (commit-days):** {longest_streak} days\n\n"
+        + f"**I'm a {day_owl_label} 🦉**\n\n"
         + "```text\n"
-        + render_bar_table(time_labels, tod, total_commits, width=25, label_emojis=time_emojis)
+        + render_bar_table(
+            time_labels,
+            tod,
+            total_commits,
+            width=25,
+            value_unit="commits",
+            label_emojis=time_emojis,
+        )
         + "\n```\n\n"
-        + "\n\n"
-        + "### 📅 Productivity by Weekday\n\n"
-        + compact_commits_line(weekday_labels, weekday)
-        + "\n\n"
         + f"📅 **I'm Most Productive on {most_productive_day}**\n\n"
         + "```text\n"
-        + render_bar_table(weekday_labels, weekday, total_commits, width=25)
+        + render_bar_table(
+            weekday_labels,
+            weekday,
+            total_commits,
+            width=25,
+            value_unit="commits",
+        )
         + "\n```\n\n"
-        + "\n\n"
-        + "### 💻 Language Usage\n\n"
-        + compact_lang_line(lang_sorted)
-        + "\n"
+        + "💻 **Language Usage**\n\n"
+        + "```text\n"
+        + render_bar_table(
+            [lang for lang, _ in lang_sorted],
+            lang_counts,
+            lang_total_bytes,
+            width=25,
+            value_unit="bytes",
+            pct_overrides=lang_pct_overrides,
+        )
+        + "\n```\n"
     )
     return md.rstrip("\n")
 
@@ -286,8 +352,15 @@ def main() -> int:
                 exclude_merge_commits=cfg.exclude_merge_commits,
             )
 
-    total_commits, tod, weekday, lang_bytes = aggregate(client, cfg)
-    new_md = render_markdown(total_commits, tod, weekday, lang_bytes)
+    total_commits, tod, weekday, lang_bytes, commit_days = aggregate(client, cfg)
+    new_md = render_markdown(
+        total_commits,
+        tod,
+        weekday,
+        lang_bytes,
+        commit_days,
+        cfg.timezone,
+    )
 
     from pathlib import Path
 

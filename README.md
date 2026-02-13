@@ -76,11 +76,13 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 ## ⚡ Stats
 
 
-[![GitHub Streak](https://streak-stats.demolab.com?user=KaranKathur06&theme=github-dark-blue&card_width=500&card_height=200)](https://git.io/streak-stats)
+
+<img src="assets/streak.svg" width="500" height="200" alt="GitHub Streak" />
 
 <br>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=KaranKathur06&theme=react-dark&bg_color=20232a&hide_border=true" width="100%"/>
+
+<img src="assets/activity-graph.svg" width="100%" alt="Contribution Graph" />
 
 <hr>
 
@@ -89,14 +91,8 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 <!--START_SECTION:github_stats-->
 ## 📊 GitHub Analytics
 
-<<<<<<< HEAD
 
-**I'm a Day 🐦**
-=======
-**Total Commits:** 212
-
-**I'm a Day 🦉**
->>>>>>> 42718a7d9bea0205bdbd5795e0891232befe9744
+**I'm a Day 🐦** 
 
 ```text
 🌞 Morning       15 commits  ██░░░░░░░░░░░░░░░░░░░░░░░   7.08 %

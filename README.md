@@ -75,11 +75,8 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 
 ## ⚡ Stats
 
-<div align="center">
-  <a href="https://github.com/denvercoder1/github-readme-streak-stats" title="Go to Source">
-    <img width="420" src="https://streak-stats.demolab.com/?user=KaranKathur06&theme=react&border=61dafb&hide_border=true" alt="KaranKathur06" />
-  </a>
-</div>
+
+[![GitHub Streak](https://streak-stats.demolab.com?user=KaranKathur06&theme=github-dark-blue&card_width=500&card_height=200)](https://git.io/streak-stats)
 
 <br>
 
@@ -92,9 +89,8 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 <!--START_SECTION:github_stats-->
 ## 📊 GitHub Analytics
 
-**Total Commits:** 212
 
-**I'm a Day 🦉**
+**I'm a Day 🐦**
 
 ```text
 🌞 Morning       15 commits  ██░░░░░░░░░░░░░░░░░░░░░░░   7.08 %

@@ -217,7 +217,7 @@ def render_markdown(
         + "### ⏰ Productivity by Time\n\n"
         + compact_commits_line(time_labels, tod)
         + "\n\n"
-        + "**I'm a Night 🦉**\n\n"
+        + "**I'm a Day 🦉**\n\n"
         + "```text\n"
         + render_bar_table(time_labels, tod, total_commits, width=25, label_emojis=time_emojis)
         + "\n```\n\n"

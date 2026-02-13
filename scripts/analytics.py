@@ -15,7 +15,7 @@ if SCRIPT_DIR not in sys.path:
 
 from github_client import GitHubClient
 from readme_updater import ReadmeUpdater
-from utils import ReadmeSection, format_kv_lines, format_lang_lines, to_percent
+from utils import ReadmeSection, to_percent
 
 
 @dataclass(frozen=True)
@@ -150,43 +150,45 @@ def render_markdown(
     weekday: Counter,
     lang_bytes: Dict[str, int],
 ) -> str:
-    # Time of day
-    tod_rows: List[Tuple[str, int, float]] = []
-    for name, _, _ in TIME_BUCKETS:
-        count = int(tod.get(name, 0))
-        tod_rows.append((name, count, to_percent(count, total_commits)))
+    def compact_commits_line(labels: List[str], counts: Dict[str, int]) -> str:
+        parts: List[str] = []
+        for label in labels:
+            c = int(counts.get(label, 0))
+            parts.append(f"{label} – {c} commits ({to_percent(c, total_commits):.2f}%)")
+        return " ".join(parts)
 
-    # Weekday
-    weekday_rows: List[Tuple[str, int, float]] = []
-    for day in WEEKDAYS:
-        count = int(weekday.get(day, 0))
-        weekday_rows.append((day, count, to_percent(count, total_commits)))
+    def compact_lang_line(rows: List[Tuple[str, int]]) -> str:
+        total_bytes = sum(b for _, b in rows)
+        parts: List[str] = []
+        for lang, b in rows:
+            pct = round((b / total_bytes * 100.0), 2) if total_bytes else 0.0
+            parts.append(f"{lang} – {pct:.2f}%")
+        return " ".join(parts) if parts else "No language data."
 
-    # Languages
-    total_bytes = sum(int(v) for v in lang_bytes.values())
-    lang_rows: List[Tuple[str, int, float]] = []
-    for lang, b in sorted(lang_bytes.items(), key=lambda x: x[1], reverse=True):
-        lang_rows.append((lang, int(b), round((b / total_bytes * 100.0), 2) if total_bytes else 0.0))
+    time_labels = [name for name, _, _ in TIME_BUCKETS]
+    weekday_labels = WEEKDAYS[:]
 
-    if len(lang_rows) > 8:
-        top = lang_rows[:8]
-        other_pct = round(max(0.0, 100.0 - sum(r[2] for r in top)), 2)
-        top_bytes = sum(r[1] for r in top)
-        other_bytes = max(0, total_bytes - top_bytes)
-        lang_rows = top + [("Other", other_bytes, other_pct)]
+    lang_sorted: List[Tuple[str, int]] = sorted(
+        ((lang, int(b)) for lang, b in lang_bytes.items()), key=lambda x: x[1], reverse=True
+    )
 
-    md = "".join(
-        [
-            "## 📊 GitHub Analytics\n\n",
-            f"**Total Commits:** {total_commits}\n\n",
-            "### ⏰ Productivity by Time\n",
-            format_kv_lines(tod_rows, label_width=10) + "\n\n",
-            "### 📅 Productivity by Weekday\n",
-            format_kv_lines(weekday_rows, label_width=10) + "\n\n",
-            "### 💻 Language Usage\n",
-            (format_lang_lines(lang_rows, label_width=12) if lang_rows else "No language data.")
-            + "\n",
-        ]
+    if len(lang_sorted) > 8:
+        top = lang_sorted[:8]
+        other_bytes = sum(b for _, b in lang_sorted[8:])
+        lang_sorted = top + [("Other", other_bytes)]
+
+    md = (
+        "## 📊 GitHub Analytics\n\n"
+        + f"**Total Commits:** {total_commits}\n\n"
+        + "### ⏰ Productivity by Time\n\n"
+        + compact_commits_line(time_labels, tod)
+        + "\n\n"
+        + "### 📅 Productivity by Weekday\n\n"
+        + compact_commits_line(weekday_labels, weekday)
+        + "\n\n"
+        + "### 💻 Language Usage\n\n"
+        + compact_lang_line(lang_sorted)
+        + "\n"
     )
     return md.rstrip("\n")
 

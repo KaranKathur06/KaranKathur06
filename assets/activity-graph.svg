@@ -1,0 +1,69 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='420' viewBox='0 0 1200 420'>
+<rect x='0' y='0' width='1200' height='420' rx='0' fill='#20232a'/>
+<text x='600.0' y='45' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='20px'>KaranKathur06's Contribution Graph</text>
+<line x1='90' y1='80' x2='90' y2='350' stroke='#5bcdec' opacity='0.25'/>
+<line x1='90' y1='350' x2='1150' y2='350' stroke='#5bcdec' opacity='0.25'/>
+<path d='M90.00,350.00 L126.55,350.00 L163.10,350.00 L199.66,350.00 L236.21,350.00 L272.76,350.00 L309.31,350.00 L345.86,350.00 L382.41,350.00 L418.97,350.00 L455.52,350.00 L492.07,350.00 L528.62,350.00 L565.17,350.00 L601.72,350.00 L638.28,350.00 L674.83,350.00 L711.38,350.00 L747.93,350.00 L784.48,350.00 L821.03,350.00 L857.59,350.00 L894.14,350.00 L930.69,350.00 L967.24,350.00 L1003.79,350.00 L1040.34,350.00 L1076.90,350.00 L1113.45,350.00 L1150.00,350.00' fill='none' stroke='#5bcdec' stroke-width='4' opacity='0.95'/>
+<circle cx='90.00' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='126.55' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='163.10' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='199.66' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='236.21' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='272.76' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='309.31' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='345.86' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='382.41' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='418.97' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='455.52' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='492.07' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='528.62' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='565.17' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='601.72' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='638.28' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='674.83' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='711.38' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='747.93' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='784.48' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='821.03' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='857.59' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='894.14' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='930.69' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='967.24' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='1003.79' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='1040.34' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='1076.90' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='1113.45' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<circle cx='1150.00' cy='350.00' r='4' fill='#ffffff' opacity='0.95'/>
+<text x='90.00' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>15</text>
+<text x='126.55' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>16</text>
+<text x='163.10' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>17</text>
+<text x='199.66' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>18</text>
+<text x='236.21' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>19</text>
+<text x='272.76' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>20</text>
+<text x='309.31' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>21</text>
+<text x='345.86' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>22</text>
+<text x='382.41' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>23</text>
+<text x='418.97' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>24</text>
+<text x='455.52' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>25</text>
+<text x='492.07' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>26</text>
+<text x='528.62' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>27</text>
+<text x='565.17' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>28</text>
+<text x='601.72' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>29</text>
+<text x='638.28' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>30</text>
+<text x='674.83' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>31</text>
+<text x='711.38' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>1</text>
+<text x='747.93' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>2</text>
+<text x='784.48' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>3</text>
+<text x='821.03' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>4</text>
+<text x='857.59' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>5</text>
+<text x='894.14' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>6</text>
+<text x='930.69' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>7</text>
+<text x='967.24' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>8</text>
+<text x='1003.79' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>9</text>
+<text x='1040.34' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>10</text>
+<text x='1076.90' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>11</text>
+<text x='1113.45' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>12</text>
+<text x='1150.00' y='385' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='12px'>13</text>
+<text x='600.0' y='400' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='14px'>Days</text>
+<text x='22' y='215.0' transform='rotate(-90 22 215.0)' text-anchor='middle' fill='#5bcdec' font-family='Segoe UI, Ubuntu, sans-serif' font-size='14px'>Contributions</text>
+</svg>

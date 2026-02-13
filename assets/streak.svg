@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='500' height='200' viewBox='0 0 500 200'>
+<rect x='0' y='0' width='500' height='200' rx='10' fill='#0D1117' stroke='#1F6FEB' stroke-width='1'/>
+<line x1='166.66666666666666' y1='30' x2='166.66666666666666' y2='175' stroke='#1F6FEB' stroke-width='1' opacity='0.5'/>
+<line x1='333.3333333333333' y1='30' x2='333.3333333333333' y2='175' stroke='#1F6FEB' stroke-width='1' opacity='0.5'/>
+<text x='83' y='70' text-anchor='middle' fill='#58A6FF' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='34px'>0</text>
+<text x='83' y='100' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='14px'>Total Contributions</text>
+<text x='83' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'>Feb 14 - Feb 13</text>
+<text x='250' y='70' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='34px'>0</text>
+<text x='250' y='100' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='14px'>Current Streak</text>
+<text x='250' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'>Today</text>
+<text x='416' y='70' text-anchor='middle' fill='#58A6FF' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='34px'>0</text>
+<text x='416' y='100' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='14px'>Longest Streak</text>
+<text x='416' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'></text>
+<text x='250' y='180' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='600' font-size='12px'>KaranKathur06</text>
+</svg>

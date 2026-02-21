@@ -4,7 +4,7 @@
 <line x1='333.3333333333333' y1='30' x2='333.3333333333333' y2='175' stroke='#1F6FEB' stroke-width='1' opacity='0.5'/>
 <text x='83' y='70' text-anchor='middle' fill='#58A6FF' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='34px'>0</text>
 <text x='83' y='100' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='14px'>Total Contributions</text>
-<text x='83' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'>Feb 21 - Feb 20</text>
+<text x='83' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'>Feb 22 - Feb 21</text>
 <text x='250' y='70' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='34px'>0</text>
 <text x='250' y='100' text-anchor='middle' fill='#FEFEFE' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='700' font-size='14px'>Current Streak</text>
 <text x='250' y='125' text-anchor='middle' fill='#9E9E9E' font-family='Segoe UI, Ubuntu, sans-serif' font-weight='400' font-size='12px'>Today</text>

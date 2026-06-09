@@ -89,36 +89,36 @@ Linux • Git • GitHub • GitHub Actions (CI/CD) • AWS (deployment fundamen
 <!--START_SECTION:github_stats-->
 ## 📊 GitHub Analytics
 
-**Total Commits:** 206
+**Total Commits:** 127
 
 **I'm a Day 🦉**
 
 ```text
-🌞 Morning       15 commits  ██░░░░░░░░░░░░░░░░░░░░░░░   7.28 %
-🌆 Day          153 commits  █████████████████████████  74.27 %
-🌃 Evening       36 commits  ██████░░░░░░░░░░░░░░░░░░░  17.48 %
-🌙 Night          2 commits  ░░░░░░░░░░░░░░░░░░░░░░░░░   0.97 %
+🌞 Morning        6 commits  ██░░░░░░░░░░░░░░░░░░░░░░░   4.72 %
+🌆 Day           97 commits  █████████████████████████  76.38 %
+🌃 Evening       22 commits  ██████░░░░░░░░░░░░░░░░░░░  17.32 %
+🌙 Night          2 commits  █░░░░░░░░░░░░░░░░░░░░░░░░   1.57 %
 ```
 
-📅 **I'm Most Productive on Tuesday**
+📅 **I'm Most Productive on Friday**
 
 ```text
-Monday          14 commits  ████████░░░░░░░░░░░░░░░░░   6.80 %
-Tuesday         44 commits  █████████████████████████  21.36 %
-Wednesday       26 commits  ███████████████░░░░░░░░░░  12.62 %
-Thursday        21 commits  ████████████░░░░░░░░░░░░░  10.19 %
-Friday          43 commits  ████████████████████████░  20.87 %
-Saturday        39 commits  ██████████████████████░░░  18.93 %
-Sunday          19 commits  ███████████░░░░░░░░░░░░░░   9.22 %
+Monday          13 commits  ██████████░░░░░░░░░░░░░░░  10.24 %
+Tuesday         13 commits  ██████████░░░░░░░░░░░░░░░  10.24 %
+Wednesday       22 commits  █████████████████░░░░░░░░  17.32 %
+Thursday        11 commits  ████████░░░░░░░░░░░░░░░░░   8.66 %
+Friday          33 commits  █████████████████████████  25.98 %
+Saturday        26 commits  ████████████████████░░░░░  20.47 %
+Sunday           9 commits  ███████░░░░░░░░░░░░░░░░░░   7.09 %
 ```
 
 💻 **Language Usage**
 
 ```text
-Python        219920056 bytes  █████████████████████████  90.25 %
+Python        219920056 bytes  █████████████████████████  90.24 %
 C++           10373312 bytes  █░░░░░░░░░░░░░░░░░░░░░░░░   4.26 %
-TypeScript    6324350 bytes  █░░░░░░░░░░░░░░░░░░░░░░░░   2.60 %
-Other         5842448 bytes  █░░░░░░░░░░░░░░░░░░░░░░░░   2.40 %
+TypeScript    6350109 bytes  █░░░░░░░░░░░░░░░░░░░░░░░░   2.61 %
+Other         5842725 bytes  █░░░░░░░░░░░░░░░░░░░░░░░░   2.40 %
 C             1222710 bytes  ░░░░░░░░░░░░░░░░░░░░░░░░░   0.50 %
 ```
 <!--END_SECTION:github_stats-->
